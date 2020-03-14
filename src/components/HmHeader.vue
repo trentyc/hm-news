@@ -1,6 +1,6 @@
 <template>
   <div class="hm-header">
-    <div class="left">
+    <div class="left" @click="$router.go(-1)">
       <span class="iconfont iconjiantou2"></span>
     </div>
     <div class="center">
@@ -11,20 +11,20 @@
 </template>
 
 <script>
-export default {};
+export default {}
 </script>
 
 <style lang="less" scoped>
 .hm-header {
   height: 40px;
   line-height: 40px;
-  border-bottom: 1px solid #ccc;
   display: flex;
   padding: 0 10px;
+  border-bottom: 1px solid #ccc;
   text-align: center;
   .left,
-  right {
-    width: 30px;
+  .right {
+    width: 25px;
   }
   .center {
     flex: 1;

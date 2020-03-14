@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- 指定路由出口 -->
+    <!-- 指定路由的出口 -->
     <router-view></router-view>
   </div>
 </template>
