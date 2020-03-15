@@ -8,6 +8,7 @@
       v-model="username"
       :rule="/^1\d{4,10}$/"
       message="用户名格式不对"
+      ref="username"
     ></hm-input>
 
     <hm-input
@@ -16,9 +17,16 @@
       v-model="password"
       :rule="/^\d{3,12}$/"
       message="用户密码格式错误"
+      ref="password"
     ></hm-input>
 
     <hm-button @click="login">登录</hm-button>
+
+    <!-- 去注册的链接 -->
+    <div class="go-register">
+      没有账号?去
+      <router-link class="link" to="/register">注册</router-link>
+    </div>
   </div>
 </template>
 
@@ -26,6 +34,14 @@
 export default {
   methods: {
     login() {
+      // 表单校验，不通过则不作axios请求
+      const result1 = this.$refs.username.validate(this.username)
+      const result2 = this.$refs.password.validate(this.password)
+
+      if (!result1 || !result2) {
+        return
+      }
+
       this.$axios({
         method: 'post',
         url: '/login',
@@ -36,10 +52,10 @@ export default {
       }).then(res => {
         console.log(res.data)
         if (res.data.statusCode === 200) {
-          alert('恭喜你，登录成功了')
+          this.$toast.success('登录成功')
           this.$router.push('./user')
         } else {
-          alert('用户名密码错误')
+          this.$toast.fail('用户名或者密码错误')
         }
       })
     }
@@ -53,4 +69,13 @@ export default {
 }
 </script>
 
-<style scoped></style>
+<style lang="less" coped>
+.go-register {
+  padding: 0 20px;
+  font-size: 18px;
+  text-align: right;
+  .link {
+    color: orange;
+  }
+}
+</style>

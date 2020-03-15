@@ -41,15 +41,17 @@ export default {
       let value = e.target.value
       this.$emit('input', value)
 
-      // 添加表单校验
+      this.validate(value)
+    },
+    validate(value) {
       if (this.rule) {
-        // 判断value值是否符合传入的正则
-        if (this.rule) {
-          if (this.rule.test(value)) {
-            this.status = 'success'
-          } else {
-            this.status = 'error'
-          }
+        // 判断value值是否符合传入 的正则
+        if (this.rule.test(value)) {
+          this.status = 'success'
+          return true
+        } else {
+          this.status = 'error'
+          return false
         }
       }
     }
@@ -78,13 +80,12 @@ export default {
     &.error {
       border-color: red;
     }
-
-    .tips {
-      color: red;
-      font-size: 12px;
-      height: 20px;
-      line-height: 20px;
-    }
+  }
+  .tips {
+    color: red;
+    font-size: 12px;
+    height: 20px;
+    line-height: 20px;
   }
 }
 </style>
