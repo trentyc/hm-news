@@ -65,6 +65,11 @@ export default {
       username: '',
       password: ''
     }
+  },
+  created() {
+    console.log(this.$route)
+    this.username = this.$route.params.username
+    this.password = this.$route.params.password
   }
 }
 </script>
